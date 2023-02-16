@@ -11,7 +11,7 @@ datasource db {
 }
 
 model chat {
-  id String @id
+  id String @id @default(uuid())
   user_id String
   chat_id String
   topic String
@@ -23,7 +23,7 @@ model chat {
 }
 
 model user {
-  id String @id
+  id String @id @default(uuid())
   name String
   email String
   password String
@@ -35,7 +35,7 @@ model user {
 }
 
 model message {
-  id String @id
+  id String @id @default(uuid())
   chat_id String
   from_user_id String
   content String?
