@@ -21,7 +21,10 @@ export class UserMapper {
 
   entityToDto(entity: UserEntity): UserDto {
     return {
-      ...entity,
+      id: entity.id,
+      email: entity.email,
+      role: entity.role,
+      name: entity.name,
       avatarUrl: entity.avatar_url,
     };
   }

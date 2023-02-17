@@ -10,23 +10,11 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model chat {
-  id String @id @default(uuid())
-  user_id String
-  chat_id String
-  topic String
-  rating Int
-  status String
-
-  created_at DateTime? @default(now())
-  updated_at DateTime? @updatedAt
-}
-
 model user {
   id String @id @default(uuid())
   name String
-  email String
-  password String
+  email String @unique
+  password String?
   avatar_url String?
   role String
 
@@ -40,6 +28,18 @@ model message {
   from_user_id String
   content String?
   file_url String?
+
+  created_at DateTime? @default(now())
+  updated_at DateTime? @updatedAt
+}
+
+model chat {
+  id String @id @default(uuid())
+  user_id String
+  admin_id String
+  topic String
+  rating Int?
+  status String
 
   created_at DateTime? @default(now())
   updated_at DateTime? @updatedAt
