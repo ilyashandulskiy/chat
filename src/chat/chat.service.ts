@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { CreateChatDto } from './dto/createChat.dto';
 import { UserEntity } from '../user/user.entity';
@@ -36,6 +36,9 @@ export class ChatService {
     const simpleAdmin = await this.prisma.user.findFirst({
       where: { role: 'admin' },
     });
+
+    if (!simpleAdmin)
+      throw new HttpException('Chat cannot be created without admins', 500);
 
     const chat: ChatEntity = await this.prisma.chat.create({
       data: {
