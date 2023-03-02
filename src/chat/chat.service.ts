@@ -5,10 +5,15 @@ import { UserEntity } from '../user/user.entity';
 import { ChatEntity } from './chat.entity';
 import { ChatMapper } from './chat.mapper';
 import { ChatDto } from './dto/chat.dto';
+import { MessageService } from '../message/message.service';
 
 @Injectable()
 export class ChatService {
-  constructor(private prisma: PrismaService, private chatMapper: ChatMapper) {}
+  constructor(
+    private prisma: PrismaService,
+    private chatMapper: ChatMapper,
+    private messageService: MessageService,
+  ) {}
 
   async getAll(): Promise<ChatDto[]> {
     const chats = await this.prisma.chat.findMany();
@@ -48,6 +53,14 @@ export class ChatService {
         status: 'new',
       },
     });
+
+    await this.messageService.create(
+      {
+        content: dto.topic,
+        fromUserId: user.id,
+      },
+      chat.id,
+    );
 
     return this.chatMapper.entityToDto(chat);
   }

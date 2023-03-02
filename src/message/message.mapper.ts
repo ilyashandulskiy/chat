@@ -15,6 +15,7 @@ export class MessageMapper {
 
   entityToDto(entity: MessageEntity): MessageDto {
     return {
+      id: entity?.id,
       fileUrl: entity?.file_url,
       content: entity?.content,
       fromUserId: entity.from_user_id,
