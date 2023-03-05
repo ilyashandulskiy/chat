@@ -7,19 +7,23 @@ import {
   WebSocketGateway,
   WebSocketServer,
 } from '@nestjs/websockets';
-import { MessageDto } from '../message/dto/message.dto';
-import { Server } from 'net';
+import { Server, Socket } from 'net';
+import { MessageService } from '../message/message.service';
+import { CreateMessageDto } from '../message/dto/createMessage.dto';
 
 @WebSocketGateway({ cors: true })
 export class EventsService
   implements OnGatewayInit, OnGatewayConnection, OnGatewayDisconnect
 {
+  constructor(private messageService: MessageService) {}
+
   @WebSocketServer()
   server: Server;
 
   @SubscribeMessage('message')
-  handleEvent(@MessageBody() data: MessageDto) {
+  handleEvent(@MessageBody() data: CreateMessageDto, socket: Socket) {
     console.log('new message', data);
+    this.messageService.create(data);
     this.server.emit('message', data);
   }
 

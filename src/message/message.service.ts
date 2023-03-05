@@ -11,13 +11,13 @@ export class MessageService {
     private messageMapper: MessageMapper,
   ) {}
 
-  async create(dto: CreateMessageDto, chatId: string): Promise<MessageDto> {
+  async create(dto: CreateMessageDto): Promise<MessageDto> {
     const message = await this.prisma.message.create({
       data: {
         from_user_id: dto.fromUserId,
         content: dto?.content,
         file_url: dto?.fileUrl,
-        chat_id: chatId,
+        chat_id: dto.chatId,
       },
     });
     return this.messageMapper.entityToDto(message);

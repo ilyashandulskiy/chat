@@ -20,6 +20,11 @@ export class ChatService {
     return chats.map(this.chatMapper.entityToDto);
   }
 
+  async getById(id: string): Promise<ChatDto> {
+    const chat = await this.prisma.chat.findFirst({ where: { id } });
+    return this.chatMapper.entityToDto(chat);
+  }
+
   async create(dto: CreateChatDto): Promise<ChatDto> {
     const foundUser = await this.prisma.user.findFirst({
       where: { email: dto.userEmail },
@@ -54,13 +59,11 @@ export class ChatService {
       },
     });
 
-    await this.messageService.create(
-      {
-        content: dto.topic,
-        fromUserId: user.id,
-      },
-      chat.id,
-    );
+    await this.messageService.create({
+      content: dto.topic,
+      fromUserId: user.id,
+      chatId: chat.id,
+    });
 
     return this.chatMapper.entityToDto(chat);
   }

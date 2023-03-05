@@ -5,4 +5,6 @@ export class CreateMessageDto {
   fromUserId: string;
   content?: string;
   fileUrl?: string;
+  @IsString()
+  chatId: string;
 }
