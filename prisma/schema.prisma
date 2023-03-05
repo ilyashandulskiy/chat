@@ -10,37 +10,51 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model user {
-  id String @id @default(uuid())
-  name String
-  email String @unique
-  password String?
-  avatar_url String?
-  role String
-
-  created_at DateTime? @default(now())
-  updated_at DateTime? @updatedAt
+enum Role {
+  admin
+  customer
 }
 
-model message {
-  id String @id @default(uuid())
-  chat_id String
-  from_user_id String
-  content String?
-  file_url String?
+model User {
+  id        String  @id @default(uuid())
+  name      String
+  email     String  @unique
+  password  String?
+  avatarUrl String?
+  role      Role    @default(customer)
 
-  created_at DateTime? @default(now())
-  updated_at DateTime? @updatedAt
+  createdAt  DateTime?    @default(now())
+  updatedAt  DateTime?    @updatedAt
+  UserInChat UserInChat[]
 }
 
-model chat {
-  id String @id @default(uuid())
-  user_id String
-  admin_id String
-  topic String
+model Message {
+  id         String  @id @default(uuid())
+  chatId     String
+  fromUserId String
+  content    String?
+  fileUrl    String?
+
+  updatedAt DateTime? @updatedAt
+  createdAt DateTime? @default(now())
+}
+
+model Chat {
+  id     String @id @default(uuid())
+  topic  String
   rating Int?
   status String
 
-  created_at DateTime? @default(now())
-  updated_at DateTime? @updatedAt
+  createdAt  DateTime?    @default(now())
+  updatedAt  DateTime?    @updatedAt
+  UserInChat UserInChat[]
+}
+
+model UserInChat {
+  userId String
+  chatId String
+  user   User   @relation(fields: [userId], references: [id])
+  chat   Chat   @relation(fields: [chatId], references: [id])
+
+  @@unique([userId, chatId])
 }

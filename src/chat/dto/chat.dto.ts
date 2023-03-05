@@ -1,7 +1,8 @@
+import { UserDto } from '../../user/dto/user.dto';
+
 export class ChatDto {
   id: string;
-  userId: string;
-  adminId: string;
+  user: UserDto[];
   topic: string;
   rating?: number;
   status: string;

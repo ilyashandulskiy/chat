@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { CreateMessageDto } from './dto/createMessage.dto';
 import { MessageMapper } from './message.mapper';
@@ -6,28 +6,31 @@ import { MessageDto } from './dto/message.dto';
 
 @Injectable()
 export class MessageService {
-  constructor(
-    private prisma: PrismaService,
-    private messageMapper: MessageMapper,
-  ) {}
+  constructor(private prisma: PrismaService, private mapper: MessageMapper) {}
 
   async create(dto: CreateMessageDto): Promise<MessageDto> {
+    const chat = await this.prisma.chat.findUnique({
+      where: { id: dto.chatId },
+    });
+    if (chat.status === 'finished')
+      throw new HttpException('Chat is already finished', 404);
+
     const message = await this.prisma.message.create({
       data: {
-        from_user_id: dto.fromUserId,
+        fromUserId: dto.fromUserId,
         content: dto?.content,
-        file_url: dto?.fileUrl,
-        chat_id: dto.chatId,
+        fileUrl: dto?.fileUrl,
+        chatId: dto.chatId,
       },
     });
-    return this.messageMapper.entityToDto(message);
+    return this.mapper.entityToDto(message);
   }
 
   async getAll(chatId: string): Promise<MessageDto[]> {
     const messages = await this.prisma.message.findMany({
-      where: { chat_id: chatId },
+      where: { chatId: chatId },
     });
 
-    return messages.map(this.messageMapper.entityToDto);
+    return messages.map(this.mapper.entityToDto);
   }
 }

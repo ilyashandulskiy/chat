@@ -2,10 +2,10 @@ import { Module } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { ChatController } from './chat.controller';
 import { ChatService } from './chat.service';
-import { ChatMapper } from './chat.mapper';
 import { MessageModule } from '../message/message.module';
 import { MessageService } from '../message/message.service';
 import { MessageMapper } from '../message/message.mapper';
+import { ChatMapper } from './chat.mapper';
 
 @Module({
   imports: [MessageModule],
@@ -13,9 +13,9 @@ import { MessageMapper } from '../message/message.mapper';
   providers: [
     ChatService,
     PrismaService,
-    ChatMapper,
     MessageService,
     MessageMapper,
+    ChatMapper,
   ],
 })
 export class ChatModule {}

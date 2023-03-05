@@ -1,15 +1,3 @@
-export class ChatEntity {
-  id: string;
-  user_id: string;
-  admin_id: string;
-  topic: string;
-  rating?: number;
-  status: string;
+import { Chat, User } from '@prisma/client';
 
-  created_at?: Date;
-  updated_at?: Date;
-
-  constructor(fields: Partial<ChatEntity>) {
-    Object.assign(this, fields);
-  }
-}
+export type ChatEntity = Chat & Partial<{ UserInChat: { user: User }[] }>;
