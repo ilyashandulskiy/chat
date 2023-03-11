@@ -10,7 +10,7 @@ export class UserMapper {
       email: entity.email,
       role: entity.role,
       name: entity.name,
-      avatarUrl: entity.avatarUrl,
+      avatarFile: entity.avatarFile,
     };
   }
 }

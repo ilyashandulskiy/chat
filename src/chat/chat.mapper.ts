@@ -14,7 +14,7 @@ export class ChatMapper {
         name: user.name,
         role: user.role,
         email: user.email,
-        avatarUrl: user.avatarUrl,
+        avatarFile: user.avatarFile,
       })),
     };
   }

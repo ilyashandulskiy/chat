@@ -73,18 +73,17 @@ export class ChatService {
       },
     });
 
-    await this.prisma.userInChat.create({
-      data: {
-        userId: simpleAdmin.id,
-        chatId: chat.id,
-      },
-    });
-
-    await this.prisma.userInChat.create({
-      data: {
-        userId: user.id,
-        chatId: chat.id,
-      },
+    await this.prisma.userInChat.createMany({
+      data: [
+        {
+          userId: simpleAdmin.id,
+          chatId: chat.id,
+        },
+        {
+          userId: user.id,
+          chatId: chat.id,
+        },
+      ],
     });
 
     await this.messageService.create({

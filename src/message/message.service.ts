@@ -19,7 +19,7 @@ export class MessageService {
       data: {
         fromUserId: dto.fromUserId,
         content: dto?.content,
-        fileUrl: dto?.fileUrl,
+        fileId: dto?.fileId,
         chatId: dto.chatId,
       },
     });
@@ -29,6 +29,7 @@ export class MessageService {
   async getAll(chatId: string): Promise<MessageDto[]> {
     const messages = await this.prisma.message.findMany({
       where: { chatId: chatId },
+      include: { file: true },
     });
 
     return messages.map(this.mapper.entityToDto);

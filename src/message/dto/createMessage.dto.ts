@@ -4,7 +4,7 @@ export class CreateMessageDto {
   @IsString()
   fromUserId: string;
   content?: string;
-  fileUrl?: string;
+  fileId?: string;
   @IsString()
   chatId: string;
 }

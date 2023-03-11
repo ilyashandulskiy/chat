@@ -14,12 +14,27 @@ export class UserService {
         ...dto,
         role: 'admin',
       },
+      include: { avatarFile: true },
+    });
+    return this.userMapper.entityToDto(created);
+  }
+
+  async update(id: string, dto: Partial<CreateAdminDto>): Promise<UserDto> {
+    const created = await this.prisma.user.update({
+      where: { id },
+      data: {
+        ...dto,
+        role: 'admin',
+      },
+      include: { avatarFile: true },
     });
     return this.userMapper.entityToDto(created);
   }
 
   async getAll(): Promise<UserDto[]> {
-    const users: UserEntity[] = await this.prisma.user.findMany();
+    const users: UserEntity[] = await this.prisma.user.findMany({
+      include: { avatarFile: true },
+    });
 
     return users.map(this.userMapper.entityToDto);
   }
@@ -27,6 +42,7 @@ export class UserService {
   async get(id: string): Promise<UserDto> {
     const user: UserEntity = await this.prisma.user.findFirst({
       where: { id },
+      include: { avatarFile: true },
     });
 
     if (!user) throw new NotFoundException();

@@ -7,4 +7,5 @@ export class CreateAdminDto {
   email: string;
   @IsString()
   password: string;
+  avatarFileId?: string;
 }

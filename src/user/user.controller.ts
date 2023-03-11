@@ -21,4 +21,12 @@ export class UserController {
   async create(@Body() body: CreateAdminDto): Promise<UserDto> {
     return await this.userService.createAdmin(body);
   }
+
+  @Post('/:id')
+  async update(
+    @Body() body: Partial<CreateAdminDto>,
+    @Param('id') id: string,
+  ): Promise<UserDto> {
+    return await this.userService.update(id, body);
+  }
 }

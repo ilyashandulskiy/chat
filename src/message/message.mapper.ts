@@ -7,10 +7,10 @@ export class MessageMapper {
   entityToDto(entity: MessageEntity): MessageDto {
     return {
       id: entity?.id,
-      fileUrl: entity?.fileUrl,
       content: entity?.content,
       fromUserId: entity.fromUserId,
       chatId: entity.chatId,
+      file: entity.file,
     };
   }
 }
