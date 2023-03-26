@@ -1,13 +1,11 @@
 import {
   Controller,
-  Get,
-  Param,
   Post,
   UploadedFile,
   UseInterceptors,
 } from '@nestjs/common';
-import { FileService } from './file.service';
 import { FileInterceptor } from '@nestjs/platform-express';
+import { FileService } from './file.service';
 
 @Controller('file')
 export class FileController {
@@ -17,10 +15,5 @@ export class FileController {
   @UseInterceptors(FileInterceptor('file'))
   create(@UploadedFile() file: Express.Multer.File) {
     return this.service.create(file);
-  }
-
-  @Get('/:fileId')
-  get(@Param('fileId') fileId: string) {
-    return this.service.get(fileId);
   }
 }

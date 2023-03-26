@@ -5,21 +5,21 @@ import { UserDto } from './dto/user.dto';
 
 @Controller('/user')
 export class UserController {
-  constructor(private readonly userService: UserService) {}
+  constructor(private readonly service: UserService) {}
 
   @Get()
   async getAll(): Promise<UserDto[]> {
-    return await this.userService.getAll();
+    return await this.service.getAll();
   }
 
   @Get('/:id')
   async get(@Param() { id }): Promise<UserDto> {
-    return await this.userService.get(id);
+    return await this.service.get(id);
   }
 
   @Post('')
   async create(@Body() body: CreateAdminDto): Promise<UserDto> {
-    return await this.userService.createAdmin(body);
+    return await this.service.createAdmin(body);
   }
 
   @Post('/:id')
@@ -27,6 +27,6 @@ export class UserController {
     @Body() body: Partial<CreateAdminDto>,
     @Param('id') id: string,
   ): Promise<UserDto> {
-    return await this.userService.update(id, body);
+    return await this.service.update(id, body);
   }
 }

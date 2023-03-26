@@ -11,6 +11,6 @@ async function bootstrap() {
   });
   app.useGlobalPipes(new ValidationPipe());
   const configService: ConfigService = app.get(ConfigService);
-  await app.listen(configService.get('PORT'));
+  await app.listen(configService.get('PORT') || 9090);
 }
 bootstrap();

@@ -11,6 +11,7 @@ export class MessageMapper {
       fromUserId: entity.fromUserId,
       chatId: entity.chatId,
       file: entity.file,
+      createdAt: entity.createdAt,
     };
   }
 }

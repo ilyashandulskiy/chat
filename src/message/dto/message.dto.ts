@@ -6,4 +6,5 @@ export class MessageDto {
   fromUserId: string;
   content?: string;
   file?: FileDto;
+  createdAt: Date;
 }
