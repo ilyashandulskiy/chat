@@ -20,6 +20,8 @@ jobs:
         # The username to authenticate with dockerhub
         DOCKERHUB_USERNAME: ${{ secrets.DOCKER_USER }}
         # The token to authenticate with dockerhub
+        BASE_TAG: latest
         DOCKERHUB_TOKEN: ${{ secrets.DOCKER_TOKEN }}
         # Name of image to publish to dockerhub, e.g. 'user/my-image'
+        TAG_NAME: ilyashandulskiy/chat
         IMAGE_NAME: ilyashandulskiy/chat
