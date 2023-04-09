@@ -27,13 +27,13 @@ jobs:
     - name: Docker pull
       uses: tarunjangra/ssh-remote-cmd@v1
       with:
-        command: cd ~/chat && docker-compose stop && docker-compose rm -f && docker-compose pull && exit 0
+        command: cd ~/chat && docker-compose stop && docker-compose rm -f && docker-compose pull &&
         host: 176.126.103.70
         pass: 76kz97NJGTSr
         
     - name: Docker up
       uses: tarunjangra/ssh-remote-cmd@v1
       with:
-        command: cd ~/chat && sudo docker-compose up -d && exit 0
+        command: cd ~/chat && sudo docker-compose up -d &&
         host: 176.126.103.70
         pass: 76kz97NJGTSr
