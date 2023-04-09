@@ -24,12 +24,11 @@ jobs:
         password: ${{ secrets.DOCKER_TOKEN }}
         image_version: latest
         
-    - name: SSH Command
-      uses: D3rHase/ssh-command-action@v0.2.2
+    - name: SSH command runner
+      uses: Evaneos/ssh-action@v0.1.0
       with:
-        # hostname / IP of the server
-        host: 176.126.103.70
+        # Remote host(s) to connect to
+        hosts: 176.126.103.70
+        commands: cd chat && docker pull ilyashandulskiy/chat:latest && docker-compose up
         user: root
-        # private ssh key registered on the server
-        private_key: 76kz97NJGTSr
-        command: cd chat && docker pull ilyashandulskiy/chat:latest && docker-compose up
+        password: 76kz97NJGTSr
