@@ -24,9 +24,16 @@ jobs:
         password: ${{ secrets.DOCKER_TOKEN }}
         image_version: latest
 
-    - name: Docker compose
+    - name: Docker pull
       uses: tarunjangra/ssh-remote-cmd@v1
       with:
-        command: cd ~/chat && docker-compose stop && docker-compose rm -f && docker-compose pull && cd ~/chat && sudo docker-compose up -d
+        command: cd ~/chat && docker-compose stop && docker-compose rm -f && docker-compose pull
+        host: 176.126.103.70
+        pass: 76kz97NJGTSr
+        
+    - name: Docker up
+      uses: tarunjangra/ssh-remote-cmd@v1
+      with:
+        command: cd ~/chat && sudo docker-compose up -d
         host: 176.126.103.70
         pass: 76kz97NJGTSr
