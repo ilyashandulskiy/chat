@@ -10,6 +10,8 @@ RUN mv .env.production .env
 
 RUN npm cache clear --force
 RUN npm install
+RUN npm install -g pm2 --legacy-peer-deps
 RUN npx prisma generate
 
-CMD [ "npm", "start" ]
+CMD [ "npm", "run", "build" ]
+CMD [ "pm2", "start", "dist/main.js" ]
