@@ -1,6 +1,6 @@
 FROM node:16
 
-EXPOSE 9091
+EXPOSE 9090
 
 COPY package*.json ./
 

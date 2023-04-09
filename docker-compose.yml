@@ -34,7 +34,7 @@ services:
     restart: 'always'
     container_name: App
     ports:
-      - "9091:9091"
+      - "9090:9090"
     environment:
       DATABASE_URL: 'postgresql://postgres:password@db:5432/postgres?connect_timeout=300'
     depends_on:
