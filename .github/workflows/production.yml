@@ -27,6 +27,6 @@ jobs:
     - name: SSH remote command executer
       uses: tarunjangra/ssh-remote-cmd@v1
       with:
-        command: cd chat && docker pull ilyashandulskiy/chat:latest && docker-compose up
+        command: cd chat && docker pull ilyashandulskiy/chat:latest && docker-compose up -d
         host: 176.126.103.70
         pass: 76kz97NJGTSr
