@@ -21,4 +21,4 @@ jobs:
         repository_name: ilyashandulskiy/chat
         user_name: ilyashandulskiy
         password: ${{ secrets.DOCKER_TOKEN }}
-        image_version: 1
+        image_version: latest
