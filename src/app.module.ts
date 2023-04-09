@@ -7,6 +7,7 @@ import { EventsModule } from './events/events.module';
 import { FileModule } from './file/file.module';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
+import { AppController } from './app.controller';
 
 @Module({
   imports: [
@@ -21,5 +22,6 @@ import { join } from 'path';
       renderPath: '.',
     }),
   ],
+  controllers: [AppController],
 })
 export class AppModule {}

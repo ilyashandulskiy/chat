@@ -28,6 +28,7 @@ services:
 
   app:
     build: .
+    image: ilyashandulskiy/chat
     networks:
       - mynet
     restart: 'always'
