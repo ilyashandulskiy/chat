@@ -23,17 +23,10 @@ jobs:
         user_name: ilyashandulskiy
         password: ${{ secrets.DOCKER_TOKEN }}
         image_version: latest
-        
-    - name: Docker pull
-      uses: tarunjangra/ssh-remote-cmd@v1
-      with:
-        command: docker pull ilyashandulskiy/chat:latest
-        host: 176.126.103.70
-        pass: 76kz97NJGTSr
-        
+
     - name: Docker compose
       uses: tarunjangra/ssh-remote-cmd@v1
       with:
-        command: cd ~/chat && docker-compose up -d
+        command: cd ~/chat && docker-compose up -d --pull
         host: 176.126.103.70
         pass: 76kz97NJGTSr
