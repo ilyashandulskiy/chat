@@ -24,11 +24,9 @@ jobs:
         password: ${{ secrets.DOCKER_TOKEN }}
         image_version: latest
         
-    - name: SSH command runner
-      uses: Evaneos/ssh-action@v0.1.0
+    - name: SSH remote command executer
+      uses: tarunjangra/ssh-remote-cmd@v1
       with:
-        # Remote host(s) to connect to
-        hosts: 176.126.103.70
-        commands: cd chat && docker pull ilyashandulskiy/chat:latest && docker-compose up
-        user: root
-        password: 76kz97NJGTSr
+        command: cd chat && docker pull ilyashandulskiy/chat:latest && docker-compose up
+        host: 176.126.103.70
+        pass: 76kz97NJGTSr
