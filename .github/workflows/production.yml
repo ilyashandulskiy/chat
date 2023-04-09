@@ -27,6 +27,6 @@ jobs:
     - name: Docker compose
       uses: tarunjangra/ssh-remote-cmd@v1
       with:
-        command: cd ~/chat && docker-compose stop && docker-compose rm -f && docker-compose pull && docker-compose up -d
+        command: cd ~/chat && docker-compose stop && docker-compose rm -f && docker-compose pull && cd ~/chat && sudo docker-compose up -d
         host: 176.126.103.70
         pass: 76kz97NJGTSr
