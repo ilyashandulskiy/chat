@@ -4,6 +4,6 @@ import { Controller, Get } from '@nestjs/common';
 export class AppController {
   @Get('')
   async getConfig() {
-    return { version: 3 };
+    return { version: 4 };
   }
 }
